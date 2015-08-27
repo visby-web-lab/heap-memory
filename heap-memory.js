@@ -2,9 +2,18 @@ if (Meteor.isClient) {
   Meteor.startup(function () {
     Session.set("player", {});
   });
-  
+
   // counter starts at 0
-  Session.setDefault('counter', 0);
+  Tracker.autorun( function () {
+    var count = Players.find().count();
+    if (count > 1) {
+      if (_.isEmpty(Session.get("player"))) {
+        Session.set("opponent", Players.findOne({_id: {$not: Session.get("player")}}));
+        console.log(Session.get("opponent"));
+      }
+    }
+  });
+
   Template.start_screen.rendered = function () {
     $(".table").hide();
   }
@@ -28,6 +37,9 @@ if (Meteor.isClient) {
   Template.start_screen.helpers({
     'player': function() {
       return Session.get("player");
+    }, 
+    'opponent': function() {
+      var allPlayers = Players.find({});
     }, 
     'visibleCards': function() {
       return VisibleCards.find().fetch();

@@ -16,7 +16,8 @@
 	  </label>
 	  <button type="submit">Start game</button>  	
   </form>
-  <div class="playerInfo">{{player.name}}</div>
+  <div class="playerInfo">{{player.name}}</div> 
+  <div class="opponentInfo">{{opponent.name}}</div>
 	<div class="table">
 		{{#each visibleCards}}
 		<div class="card"><p>Row:{{this.row}} Col: {{this.col}}<br>Pair:{{this.imagePair}}</p></div>
