@@ -39,7 +39,7 @@ if (Meteor.isClient) {
       return Session.get("player");
     }, 
     'opponent': function() {
-      var allPlayers = Players.find({});
+      return Session.get("opponent");
     }, 
     'visibleCards': function() {
       return VisibleCards.find().fetch();
