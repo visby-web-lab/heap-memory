@@ -1,10 +1,11 @@
 if (Meteor.isClient) {
   Meteor.startup(function () {
     Session.set("player", {});
+    Session.set('cardInTurnCounter', 0);
   });
   
   // counter starts at 0
-  Session.setDefault('counter', 0);
+
   Template.start_screen.rendered = function () {
     $(".table").hide();
   };
@@ -25,9 +26,25 @@ if (Meteor.isClient) {
     },
 
     'click .card': function (evt, template) {
-      var thisCard = this;
+      var thisCard = this,
+        cardCounter = Session.get('cardInTurnCounter');
       console.log("clicked card: %s", JSON.stringify(thisCard));
-      //
+      // First card - show it and remember
+      if (cardCounter == 0) {
+        Session.set('openCardPairNumber', thisCard.imagePair);
+      } else {
+        if (thisCard.imagePair === Session.get('openCardPairNumber')) {
+          //MATCH !!!!
+          console.log("Matched pair %d", thisCard.imagePair);
+          var cardsToRemove = VisibleCards.find({imagePair: thisCard.imagePair}).fetch();
+          cardsToRemove.forEach(function (cardItem) {
+            VisibleCards.upsert(cardItem._id, {$set: { removed: true }});
+          });
+        }
+        Session.set('openCardPairNumber', undefined);
+      }
+      Session.set('cardInTurnCounter', cardCounter == 1? 0: 1);
+
     }
   });
   Template.start_screen.helpers({
