@@ -5,7 +5,8 @@ if (Meteor.isClient) {
 
   // counter starts at 0
   Tracker.autorun( function () {
-    var count = Players.find().count();
+    var players = Players.find();
+    var count = players.count();
     if (count > 1) {
       if (_.isEmpty(Session.get("player"))) {
         Session.set("opponent", Players.findOne({_id: {$not: Session.get("player")}}));
