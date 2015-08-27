@@ -1,17 +1,23 @@
 if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault('counter', 0);
+  Template.start_screen.rendered = function () {
+    $(".table").hide();
+  }
 
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
-    }
-  });
+  Template.start_screen.events({
+    'submit .name': function (event) {
+      event.preventDefault();
+      var self = this; 
+      Players.insert({name: $(event.currentTarget).find("#name_field").val()}, function (error, result) {
+        if (error) {
+          console.log("Error: ", error);
+        } else {
+          console.log(result, Players.findOne({_id: result}).name);
+          $(".table").fadeIn();
+        }
+      });
 
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
     }
   });
 }

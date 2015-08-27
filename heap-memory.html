@@ -5,22 +5,22 @@
 <body>
   <h1>Welcome to Heap Memory!</h1>
 
-  {{> game_table}}
+  {{> start_screen}}
 </body>
 
 <template name="start_screen">
   <p>Welcome to Heap Memory!</p>
-  <label>What's your name?<br>
-  	<input type="text">
-  </label>
-  <button>Start game</button>
-</template>
-
-<template name="game_table">
+  <form name="name" class="name">
+	  <label>What's your name?<br>
+	  	<input type="text" id="name_field">
+	  </label>
+	  <button type="submit">Start game</button>  	
+  </form>
 	<div class="table">
 		{{#each VisibleCards}}
 		<div class="card"></div>
 		{{/each}}
 	</div>
+
 
 </template>
