@@ -13,14 +13,22 @@ if (Meteor.isClient) {
         if (error) {
           console.log("Error: ", error);
         } else {
-          console.log(result, Players.findOne({_id: result}).name);
+          Session.set("player", {name: Players.findOne({_id: result}).name});
           $(".table").fadeIn();
+          $(event.currentTarget).fadeOut();
         }
       });
 
     }
   });
+  Template.start_screen.helpers({
+    'name': function() {
+      return Session.get("player");
+    }
+  });
 }
+
+
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
