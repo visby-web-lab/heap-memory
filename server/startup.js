@@ -16,9 +16,9 @@ function createGame() {
     var row = Math.floor(cardIndex / 4),
       col = cardIndex % 4,
       xOffset = 0.6 * Math.random() - 0.3,
-      yOffset = 0.6 * Math.random() - 0.3;
-    rotation = Math.round(360 * Math.random());
-    imagePair = imagePairsLeft.splice(Math.floor(Math.random() * imagePairsLeft.length), 1)[0];
+      yOffset = 0.6 * Math.random() - 0.3,
+      rotation = Math.round(360 * Math.random()),
+      imagePair = imagePairsLeft.splice(Math.floor(Math.random() * imagePairsLeft.length), 1)[0];
     VisibleCards.insert({
       row: row,
       col: col,
