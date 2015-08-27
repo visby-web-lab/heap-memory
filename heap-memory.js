@@ -16,7 +16,7 @@ if (Meteor.isClient) {
 
   Template.start_screen.rendered = function () {
     $(".table").hide();
-  }
+  };
 
   Template.start_screen.events({
     'submit .name': function (event) {
@@ -31,7 +31,12 @@ if (Meteor.isClient) {
           $(event.currentTarget).fadeOut();
         }
       });
+    },
 
+    'click .card': function (evt, template) {
+      var thisCard = this;
+      console.log("clicked card: %s", JSON.stringify(thisCard));
+      //
     }
   });
   Template.start_screen.helpers({
