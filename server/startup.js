@@ -34,5 +34,6 @@ function createGame() {
 
 Meteor.startup(function () {
   VisibleCards.remove({});
+  Players.remove({});
   createGame();
 });

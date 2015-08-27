@@ -3,29 +3,30 @@
 </head>
 
 <body>
-<h1>Welcome to Heap Memory!</h1>
+  <h1>Welcome to Heap Memory!</h1>
 
-{{> start_screen}}
+  {{> start_screen}}
 </body>
 
 <template name="start_screen">
   <p>Welcome to Heap Memory!</p>
   <form name="name" class="name">
-    <label>What's your name?<br>
-      <input type="text" id="name_field">
-    </label>
-    <button type="submit">Start game</button>
+	  <label>What's your name?<br>
+	  	<input type="text" id="name_field">
+	  </label>
+	  <button type="submit">Start game</button>  	
   </form>
   <div class="playerInfo">{{player.name}}</div>
-  <div class="table">
-    {{#each visibleCards}}
+  <div class="opponentInfo">{{opponent.name}}</div>
+	<div class="table">
+		{{#each visibleCards}}
       <div class="card">
         {{#unless this.removed}}
         <p>Row:{{this.row}} Col: {{this.col}}<br>Pair:{{this.imagePair}}</p>
         {{/unless}}
       </div>
-    {{/each}}
-  </div>
+		{{/each}}
+	</div>
 
 
 </template>

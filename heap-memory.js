@@ -5,6 +5,16 @@ if (Meteor.isClient) {
   });
   
   // counter starts at 0
+  Tracker.autorun( function () {
+    var players = Players.find();
+    var count = players.count();
+    if (count > 1) {
+      if (_.isEmpty(Session.get("player"))) {
+        Session.set("opponent", Players.findOne({_id: {$not: Session.get("player")}}));
+        console.log(Session.get("opponent"));
+      }
+    }
+  });
 
   Template.start_screen.rendered = function () {
     $(".table").hide();
@@ -40,7 +50,7 @@ if (Meteor.isClient) {
           cardsToRemove.forEach(function (cardItem) {
             VisibleCards.upsert(cardItem._id, {$set: { removed: true }});
           });
-        }
+    }
         Session.set('openCardPairNumber', undefined);
       }
       Session.set('cardInTurnCounter', cardCounter == 1? 0: 1);
@@ -50,6 +60,9 @@ if (Meteor.isClient) {
   Template.start_screen.helpers({
     'player': function() {
       return Session.get("player");
+    }, 
+    'opponent': function() {
+      return Session.get("opponent");
     }, 
     'visibleCards': function() {
       return VisibleCards.find().fetch();
