@@ -1,14 +1,17 @@
 <head>
-  <title>heap-memory</title>
+  <title>Heap Memory</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <h1>Welcome to Heap Memory!</h1>
 
-  {{> hello}}
+  {{> game_table}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="start_screen">
+  <p>Welcome to Heap Memory!</p>
+  <label>What's your name?<br>
+  	<input type="text">
+  </label>
+  <button>Start game</button>
 </template>
