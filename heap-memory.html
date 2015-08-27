@@ -15,3 +15,12 @@
   </label>
   <button>Start game</button>
 </template>
+
+<template name="game_table">
+	<div class="table">
+		{{#each VisibleCards}}
+		<div class="card"></div>
+		{{/each}}
+	</div>
+
+</template>

@@ -2,6 +2,6 @@
  * Created by johan on 15-08-27.
  */
 
-VisibleCards = Mongo.Collection("visible_cards");
-Players = Mongo.Collection("players");
-Games = Mongo.Collection("games");
+VisibleCards = new Mongo.Collection("visible_cards");
+Players = new Mongo.Collection("players");
+Games = new Mongo.Collection("games");
