@@ -2,6 +2,7 @@ if (Meteor.isClient) {
   Meteor.startup(function () {
     Session.set("player", {});
   });
+  
   // counter starts at 0
   Session.setDefault('counter', 0);
   Template.start_screen.rendered = function () {
@@ -27,7 +28,10 @@ if (Meteor.isClient) {
   Template.start_screen.helpers({
     'player': function() {
       return Session.get("player");
-    }
+    }, 
+    'visibleCards': function() {
+      return VisibleCards.find().fetch();
+    } 
   });
 }
 

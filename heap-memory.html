@@ -18,8 +18,8 @@
   </form>
   <div class="playerInfo">{{player.name}}</div>
 	<div class="table">
-		{{#each VisibleCards}}
-		<div class="card"></div>
+		{{#each visibleCards}}
+		<div class="card"><p>Row:{{this.row}} Col: {{this.col}}<br>Pair:{{this.imagePair}}</p></div>
 		{{/each}}
 	</div>
 
