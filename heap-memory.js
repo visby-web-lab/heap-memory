@@ -5,21 +5,17 @@ if (Meteor.isClient) {
     Session.set('cardInTurnCounter', 0);
   });
 
+  // 1 - start screen
   Template.start_screen.rendered = function () {
     $(".table").hide();
     $(".playerInfo").hide();
   };
 
-  Template.pick_opponent.helpers({
-    players: function () {
-      return Players.find({name: {$not: Session.get("player").name}});
-    }
-  });
-
   Template.start_screen.events({
     'submit .name': function (event) {
       event.preventDefault();
       var self = this; 
+
       // Insert new player
       Players.insert({name: $(event.currentTarget).find("#name_field").val()}, function (error, result) {
         if (error) {
@@ -71,4 +67,13 @@ if (Meteor.isClient) {
       return VisibleCards.find().fetch();
     } 
   });
+
+  // 2 - Pick your opponent
+  Template.pick_opponent.helpers({
+    players: function () {
+      return Players.find({name: {$not: Session.get("player").name}});
+    }
+  });
+
+
 }
