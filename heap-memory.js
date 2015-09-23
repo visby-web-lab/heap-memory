@@ -5,7 +5,7 @@ if (Meteor.isClient) {
   });
   
   // counter starts at 0
-  Tracker.autorun( function () {
+  /*Tracker.autorun( function () {
     var players = Players.find();
     var count = players.count();
     if (count > 1) {
@@ -14,11 +14,17 @@ if (Meteor.isClient) {
         console.log(Session.get("opponent"));
       }
     }
-  });
+  });*/
 
   Template.start_screen.rendered = function () {
     $(".table").hide();
   };
+
+  Template.pick_opponent.helpers({
+    players: function () {
+      return Players.find({});
+    }
+  });
 
   Template.start_screen.events({
     'submit .name': function (event) {
@@ -29,15 +35,17 @@ if (Meteor.isClient) {
           console.log("Error: ", error);
         } else {
           Session.set("player", {name: Players.findOne({_id: result}).name});
-          $(".table").fadeIn();
+          BlazeLayout.render('pick_opponent');
+          /*$(".table").fadeIn();
           $(event.currentTarget).fadeOut();
-        }
+*/        }
       });
     },
 
     'click .card': function (evt, template) {
       var thisCard = this,
         cardCounter = Session.get('cardInTurnCounter');
+
       console.log("clicked card: %s", JSON.stringify(thisCard));
       // First card - show it and remember
       if (cardCounter == 0) {
@@ -67,13 +75,5 @@ if (Meteor.isClient) {
     'visibleCards': function() {
       return VisibleCards.find().fetch();
     } 
-  });
-}
-
-
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
   });
 }

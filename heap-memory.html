@@ -17,8 +17,9 @@
 	  <button type="submit">Start game</button>  	
   </form>
   <div class="playerInfo">{{player.name}}</div>
-  <div class="opponentInfo">{{opponent.name}}</div>
-	<div class="table">
+  <!-- <div class="opponentInfo">{{opponent.name}}</div>
+	 -->
+	 <div class="table">
 		{{#each visibleCards}}
       <div class="card">
         {{#unless this.removed}}
@@ -27,6 +28,13 @@
       </div>
 		{{/each}}
 	</div>
+</template>
 
-
+<template name="pick_opponent">
+	<h2>Pick your opponent</h2>
+	<ul>
+		{{#each players}}
+			<li>{{ player.name }}</li>
+		{{/each }}
+	</ul>
 </template>
