@@ -16,7 +16,7 @@
 	  </label>
 	  <button type="submit">Start game</button>  	
   </form>
-  <div class="playerInfo">{{player.name}}</div>
+  <div class="playerInfo">Player name: {{player.name}}</div>
   <!-- <div class="opponentInfo">{{opponent.name}}</div>
 	 -->
 	 <div class="table">
@@ -34,7 +34,7 @@
 	<h2>Pick your opponent</h2>
 	<ul>
 		{{#each players}}
-			<li>{{ player.name }}</li>
+			<li>{{ this.name }}</li>
 		{{/each }}
 	</ul>
 </template>

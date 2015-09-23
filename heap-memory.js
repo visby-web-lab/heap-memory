@@ -1,28 +1,18 @@
 if (Meteor.isClient) {
   Meteor.startup(function () {
+    // Reset global vars at start
     Session.set("player", {});
     Session.set('cardInTurnCounter', 0);
   });
-  
-  // counter starts at 0
-  /*Tracker.autorun( function () {
-    var players = Players.find();
-    var count = players.count();
-    if (count > 1) {
-      if (_.isEmpty(Session.get("player"))) {
-        Session.set("opponent", Players.findOne({_id: {$not: Session.get("player")}}));
-        console.log(Session.get("opponent"));
-      }
-    }
-  });*/
 
   Template.start_screen.rendered = function () {
     $(".table").hide();
+    $(".playerInfo").hide();
   };
 
   Template.pick_opponent.helpers({
     players: function () {
-      return Players.find({});
+      return Players.find({name: {$not: Session.get("player").name}});
     }
   });
 
@@ -30,15 +20,20 @@ if (Meteor.isClient) {
     'submit .name': function (event) {
       event.preventDefault();
       var self = this; 
+      // Insert new player
       Players.insert({name: $(event.currentTarget).find("#name_field").val()}, function (error, result) {
         if (error) {
           console.log("Error: ", error);
         } else {
+          // Save player name to global variable
           Session.set("player", {name: Players.findOne({_id: result}).name});
-          BlazeLayout.render('pick_opponent');
-          /*$(".table").fadeIn();
+          // Fade out name input
           $(event.currentTarget).fadeOut();
-*/        }
+          $(".playerInfo").show();
+          // Render new layout
+          BlazeLayout.render('pick_opponent');
+        //  $(".table").fadeIn();
+        }
       });
     },
 
