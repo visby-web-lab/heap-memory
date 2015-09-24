@@ -14,7 +14,7 @@ if (Meteor.isClient) {
   Template.start_screen.events({
     'submit .name': function (event) {
       event.preventDefault();
-      var self = this; 
+      var self = this;
 
       // Insert new player
       Players.insert({name: $(event.currentTarget).find("#name_field").val()}, function (error, result) {
