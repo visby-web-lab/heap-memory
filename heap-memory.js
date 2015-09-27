@@ -72,7 +72,10 @@ if (Meteor.isClient) {
   Template.pick_opponent.helpers({
     players: function () {
       return Players.find({name: {$not: Session.get("player").name}});
-    }
+    },
+    otherPlayers: function() {
+      return Players.find().count() > 1;
+    },
   });
 
 

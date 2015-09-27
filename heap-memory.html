@@ -31,9 +31,13 @@
 
 <template name="pick_opponent">
 	<h2>Pick your opponent</h2>
-	<ul>
-		{{#each players}}
-			<li>{{ this.name }}</li>
-		{{/each }}
-	</ul>
+  {{#if otherPlayers}}
+    <ul>
+      {{#each players}}
+        <li>{{ this.name }}</li>
+      {{/each }}
+    </ul>
+  {{else}}
+    <p>No other players currently online</p>
+  {{/if}}
 </template>
